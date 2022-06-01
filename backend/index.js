@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const config = require('./config/config');
 const mongoHelper = require('./controller/mongo.controller');
+const redisHelper = require('./controller/redis.controller');
 
 const app = express();
 app.use(cors());
@@ -17,4 +18,5 @@ app.get('/', (_, res, next) => res.send("Team Red | Share Broker API Services"))
 app.listen(config.serverPort, () => {
     console.log(`App listening on port ${config.serverPort}`);
     mongoHelper.init();
+    redisHelper.init();
 });
