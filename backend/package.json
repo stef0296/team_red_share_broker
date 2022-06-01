@@ -1,0 +1,18 @@
+{
+  "name": "node-broker",
+  "version": "1.0.0",
+  "description": "Node application to power the share broker application for Team Red",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "redis",
+    "neo4j"
+  ],
+  "author": "Stefano Alvares",
+  "license": "ISC"
+}
