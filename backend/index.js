@@ -1,11 +1,18 @@
 const express = require('express');
-const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const config = require('./config/config');
 const mongoHelper = require('./controller/mongo.controller');
 
-app.get('/', function (req, res) {
-    res.send('Hello World');
-});
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
+
+app.get('/', (_, res, next) => res.send("Team Red | Share Broker API Services"));
+
 
 app.listen(config.serverPort, () => {
     console.log(`App listening on port ${config.serverPort}`);
