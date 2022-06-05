@@ -1,15 +1,24 @@
 var mongo = require('mongodb');
-var client = mongo.MongoClient;
+// var mongoose = require('mongoose');
 var config = require('../config/config');
-
+var client = new mongo.MongoClient(config.mongoUrl);
+var db;
 class MongoController {
-    init() {
+    async init() {
         try {
-            client.connect(config.mongoUrl, function (err, db) {
-                if (err) throw err;
-                console.log("Database created!");
-                db.close();
-            });
+            await client.connect();
+            console.log("Database created!");
+            db = client.db(config.mongoDbName);
+            const collection = db.collection('test01');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async addNewsToCollection(data) {
+        try {
+            const collection = db.collection('news');
+            await collection.insertMany(data);
         } catch (err) {
             console.log(err);
         }
