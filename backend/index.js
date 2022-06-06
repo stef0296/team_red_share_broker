@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const config = require('./config/config');
 const mongoHelper = require('./controller/mongo.controller');
 const redisHelper = require('./controller/redis.controller');
+const avHelper = require('./controller/av.controller');
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 app.get('/', (_, res, next) => res.send("Team Red | Share Broker API Services"));
+
+app.get('/av-news', (req, res, next) => avHelper.getNews(req, res));
 
 
 app.listen(config.serverPort, () => {
