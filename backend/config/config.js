@@ -1,4 +1,26 @@
 const dotenv = require('dotenv');
+const stocks = [
+    'AAPL',
+    'MSFT',
+    'AMZN',
+    'TSLA',
+    'GOOG',
+    'GOOGL',
+    'FB',
+    'NVDA',
+    'AVGO',
+    'PEP',
+    'COST',
+    'ADBE',
+    'CMCSA',
+    'CSCO',
+    'INTC',
+    'AMD',
+    'TMUS',
+    'TXN',
+    'QCOM',
+    'AMGN',
+];
 dotenv.config();
 
 module.exports = {
@@ -8,4 +30,5 @@ module.exports = {
     redisUrl: process.env.REDIS_URL,
     alphaUrl: process.env.ALPHAURL,
     alphaApiKey: process.env.ALPHAAPIKEY,
+    stocks: stocks,
 }
