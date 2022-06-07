@@ -23,6 +23,24 @@ class MongoController {
             console.log(err);
         }
     }
+
+    async addOverviewToCollection(data) {
+        try {
+            const collection = db.collection('overview');
+            await collection.insertOne(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async addTimeseriesToCollection(data) {
+        try {
+            const collection = db.collection('timeseries');
+            await collection.insertOne(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 const mongoHelper = new MongoController();
