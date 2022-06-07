@@ -1,0 +1,77 @@
+version: "3.9"
+
+services:
+  frontend:
+    container_name: stockapp
+    env_file: ./backend/.env
+    restart: always
+    build: .
+    ports:
+        - '3000:3000'
+    depends_on:
+      - mongodb
+      - redis
+      - neo4j
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongocontainer
+    env_file: ./backend/.env
+ 
+    volumes:
+      - ./mongodb:/data/mongodb/
+    expose:
+      - 27017
+    ports:
+      - '27017-27019:27017-27019'
+    networks:
+      - backend
+ 
+  redis:
+    image: redis:7.0.0-alpine
+    container_name: rediscontainer
+    env_file: ./backend/.env
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+    volumes:
+      - redis:/data/redis/
+ 
+  neo4j:
+    image: neo4j:community
+    container_name: neo4jcontainer
+    env_file: ./backend/.env
+    restart: unless-stopped
+    networks:
+      - backend
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./conf:/conf
+      - ./data:/data
+      - ./import:/import
+      - ./logs:/logs
+      - ./plugins:/plugins
+    environment: 
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms.memory.heap.initial_size=1G
+      - NEO4J_dbms_memory_heap_max__size=1G
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mongodb:
+  redis:
+  conf:
+  data:
+  plugin:
+  logs:
+  import:
+
+
+  
