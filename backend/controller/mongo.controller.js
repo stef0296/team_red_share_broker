@@ -41,6 +41,31 @@ class MongoController {
             console.log(err);
         }
     }
+
+    async addUsers(data) {
+        const collection = db.collection('users');
+        await collection.insertMany(data);
+    }
+    async getUsers() {
+        const collection = db.collection('users');
+        let users = await collection.find({}).toArray();
+        return users;
+    }
+
+    async addDepositTransaction(userId, amount) {
+        const transactionCollection = db.collection('transactions');
+        const depositCollection = db.collection('deposits');
+        
+        let depositResult = await depositCollection.insertOne({
+            userId: userId,
+            amount: amount,
+        });
+
+        await transactionCollection.insertOne({
+            transactionId: mongo.ObjectId(depositResult.insertedId).toString(),
+            transactionType: 'deposit'
+        });
+    }
 }
 
 const mongoHelper = new MongoController();
