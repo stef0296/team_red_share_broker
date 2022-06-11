@@ -21,7 +21,7 @@ app.use(
 app.get("/", (_, res, next) =>
   res.send("Team Red | Share Broker API Services")
 );
-app.get("/av-news", (req, res, next) => newsController.getNews(req, res));
+app.get("/av-news", (req, res, next) => newsController.fetchNewsFromApi(req, res));
 app.get("/watchlist", (req, res, next) => watch.getwatchlist(req, res));
 
 app.listen(config.serverPort, () => {
