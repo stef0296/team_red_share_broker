@@ -45,27 +45,35 @@ class MongoController {
     }
   }
 
-
+  /// Add news collection to database
   async addNewsToCollection(data) {
     await this.setData(Collection.NEWS, data, true);
   }
 
+  /// Add company overview data to database 
   async addOverviewToCollection(data) {
     await this.setData(Collection.OVERVIEW, data, false);
   }
 
+  /// Add Timeseries for a specific stock to database
   async addTimeseriesToCollection(data) { 
     await this.setData(Collection.TIMESERIES, data, false);
   }
 
+  /// Add Users to database collection
   async addUsers(data) {
     await this.setData(Collection.USERS, data, false);
   }
 
+  /// Get list of users from database
   async getUsers() {
     return await this.getData(Collection.USERS, {});
   }
 
+  /// Function to add deposits to user account
+  /// The amount and user id is added to the `deposit` collection.
+  /// The _id generated for the deposit is then stored in the transactions collection.
+  /// The transaction collection is a master collection for all types of transactions
   async addDepositTransaction(userId, amount) {
     let depositResult = await this.setData(Collection.DEPOSITS, {userId: userId, amount: amount}, false)
 
@@ -75,6 +83,7 @@ class MongoController {
     }, false);
   }
 
+  /// Add watchlist data to collection
   async addwatchlistToCollection(data) {
     await this.setData(Collection.WATCHLIST, data, true);
   }
