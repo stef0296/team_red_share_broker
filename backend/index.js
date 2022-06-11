@@ -6,7 +6,7 @@ const mongoHelper = require("./controller/mongo.controller");
 const redisHelper = require("./controller/redis.controller");
 const avHelper = require("./controller/av.controller");
 const newsController = require("./controller/news.controller");
-const watch = require("./controller/watchlist");
+const watchlistController = require("./controller/watchlist.controller");
 
 const app = express();
 app.use(cors());
@@ -29,10 +29,12 @@ app.get("/fetch-news", (req, res, next) => newsController.fetchNewsFeed(req, res
 
 app.get("/fetch-ticker-news", (req, res, next) => newsController.fetchNewsFeedForTicker(req, res));
 
-app.get("/watchlist", (req, res, next) => watch.getwatchlist(req, res));
+app.get("/build-watchlist", (req, res, next) => watchlistController.fetchWatchlistFromApi(req, res));
 
-app.listen(config.serverPort, () => {
+app.get("/get-watchlist", (req, res, next) => watchlistController.fetchWatchlist(req, res));
+
+app.listen(config.serverPort, async () => {
   console.log(`App listening on port ${config.serverPort}`);
-  mongoHelper.init();
-  redisHelper.init();
+  await mongoHelper.init();
+  await redisHelper.init();
 });
