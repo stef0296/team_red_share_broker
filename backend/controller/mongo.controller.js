@@ -45,11 +45,6 @@ class MongoController {
     }
   }
 
-  /// Add news collection to database
-  async addNewsToCollection(data) {
-    await this.setData(Collection.NEWS, data, true);
-  }
-
   /// Add company overview data to database 
   async addOverviewToCollection(data) {
     await this.setData(Collection.OVERVIEW, data, false);

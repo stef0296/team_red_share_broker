@@ -5,6 +5,7 @@ const config = require("./config/config");
 const mongoHelper = require("./controller/mongo.controller");
 const redisHelper = require("./controller/redis.controller");
 const avHelper = require("./controller/av.controller");
+const newsController = require("./controller/news.controller");
 const watch = require("./controller/watchlist");
 
 const app = express();
@@ -20,7 +21,7 @@ app.use(
 app.get("/", (_, res, next) =>
   res.send("Team Red | Share Broker API Services")
 );
-app.get("/av-news", (req, res, next) => avHelper.getNews(req, res));
+app.get("/av-news", (req, res, next) => newsController.getNews(req, res));
 app.get("/watchlist", (req, res, next) => watch.getwatchlist(req, res));
 
 app.listen(config.serverPort, () => {
