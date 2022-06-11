@@ -2,6 +2,7 @@ var mongo = require("mongodb");
 // var mongoose = require("mongoose");
 var config = require("../config/config");
 var client = new mongo.MongoClient(config.mongoUrl);
+var Collection = require('../enums/collection.enum');
 var db;
 class MongoController {
   async init() {
@@ -46,38 +47,36 @@ class MongoController {
 
 
   async addNewsToCollection(data) {
-    await this.setData("news", data, true);
+    await this.setData(Collection.NEWS, data, true);
   }
 
   async addOverviewToCollection(data) {
-    await this.setData("overview", data, false);
+    await this.setData(Collection.OVERVIEW, data, false);
   }
 
   async addTimeseriesToCollection(data) { 
-    await this.setData("timeseries", data, false);
+    await this.setData(Collection.TIMESERIES, data, false);
   }
 
   async addUsers(data) {
-    await this.setData("users", data, false);
+    await this.setData(Collection.USERS, data, false);
   }
 
   async getUsers() {
-    return await this.getData("users", {});
+    return await this.getData(Collection.USERS, {});
   }
 
   async addDepositTransaction(userId, amount) {
-    const transactionCollection = db.collection("transactions");
+    let depositResult = await this.setData(Collection.DEPOSITS, {userId: userId, amount: amount}, false)
 
-    let depositResult = await this.setData("deposits", {userId: userId, amount: amount}, false)
-
-    await this.setData("transactions", {
+    await this.setData(Collection.TRANSACTIONS, {
       transactionId: mongo.ObjectId(depositResult.insertedId).toString(),
       transactionType: "deposit",
     }, false);
   }
 
   async addwatchlistToCollection(data) {
-    await this.setData("list", data, true);
+    await this.setData(Collection.WATCHLIST, data, true);
   }
 }
 
