@@ -77,11 +77,6 @@ class MongoController {
       transactionType: "deposit",
     }, false);
   }
-
-  /// Add watchlist data to collection
-  async addwatchlistToCollection(data) {
-    await this.setData(Collection.WATCHLIST, data, true);
-  }
 }
 
 const mongoHelper = new MongoController();

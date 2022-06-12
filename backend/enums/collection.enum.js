@@ -6,6 +6,7 @@ const Collection = Object.freeze({
     DEPOSITS: "deposits",
     TRANSACTIONS: "transactions",
     WATCHLIST: "watchlist",
+    QUOTE: 'quote'
 });
 
 module.exports = Collection;
