@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const config = require("./config/config");
 const mongoHelper = require("./controller/mongo.controller");
 const redisHelper = require("./controller/redis.controller");
-const avHelper = require("./controller/av.controller");
 const newsController = require("./controller/news.controller");
 const watchlistController = require("./controller/watchlist.controller");
 
