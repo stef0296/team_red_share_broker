@@ -64,19 +64,6 @@ class MongoController {
   async getUsers() {
     return await this.getData(Collection.USERS, {});
   }
-
-  /// Function to add deposits to user account
-  /// The amount and user id is added to the `deposit` collection.
-  /// The _id generated for the deposit is then stored in the transactions collection.
-  /// The transaction collection is a master collection for all types of transactions
-  async addDepositTransaction(userId, amount) {
-    let depositResult = await this.setData(Collection.DEPOSITS, {userId: userId, amount: amount}, false)
-
-    await this.setData(Collection.TRANSACTIONS, {
-      transactionId: mongo.ObjectId(depositResult.insertedId).toString(),
-      transactionType: "deposit",
-    }, false);
-  }
 }
 
 const mongoHelper = new MongoController();
