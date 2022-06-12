@@ -2,6 +2,7 @@ const config = require("../config/config");
 const axios = require("axios").default;
 var mongoHelper = require("./mongo.controller");
 var Collection = require('../enums/collection.enum');
+const redisController = require("./redis.controller");
 
 class Watchlist {
   timeout(ms) {
@@ -27,17 +28,25 @@ class Watchlist {
 
   async fetchWatchlist(req, res) {
     let data = await this.getWatchlistFromCollection();
-    res.send(data);
+    // res.send(data);
   }
 
   /// Database write method to add watchlist data to collection
   async addwatchlistToCollection(data) {
+    await redisController.setData(Collection.QUOTE, data);
     await mongoHelper.setData(Collection.QUOTE, data, false);
   }
 
   /// Database read method to get data from collection
   async getWatchlistFromCollection() {
-    return await mongoHelper.getData(Collection.QUOTE, {});
+    let result = await redisController.getData(Collection.QUOTE);
+    if(result.length == 0) {
+      result = await mongoHelper.getData(Collection.QUOTE, {});
+      for(let item of result) {
+        await redisController.setData(Collection.QUOTE, item);
+      }
+    }
+    return result;
   }
 }
 const watch = new Watchlist();
