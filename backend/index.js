@@ -27,7 +27,8 @@ app.get("/av-ticker-news", (req, res, next) => newsController.fetchNewsForTicker
 
 app.get("/fetch-news", (req, res, next) => newsController.fetchNewsFeed(req, res));
 
-app.get("/fetch-ticker-news", (req, res, next) => newsController.fetchNewsFeedForTicker(req, res));
+app.get("/fetch-ticker-news", (req, res, next) => newsController.fetchNewsFeedForTicker
+(req, res));
 
 app.get("/watchlist", (req, res, next) => watch.getwatchlist(req, res));
 
