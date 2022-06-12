@@ -18,10 +18,20 @@ class NewsController {
 
     /// Endpoint to fetch news data for a specific ticker
     /// and add it to the MongoDB collection
-    async fetchNewsForTickerFromApi(req, res) {}
+    async fetchNewsForTickerFromApi(req, res) {
+        let ticker = req.query.ticker;
+        const url = `${config.alphaUrl}?function=NEWS_SENTIMENT&apikey=${config.alphaApiKey}&ticker=${ticker}`;
+        let response = await axios.get(url);
+        let data = response.data;
+        console.log(data);
+        await this.addTickerNewsToCollection(ticker, data.feed);
+        res.send('OK');
+    }
 
     /// Endpoint to fetch news data from MongoDB collection
-    async fetchNewsFeed(req, res) {}
+    async fetchNewsFeed(req, res) {
+        
+    }
 
     /// Endpoint to fetch news data for a specific ticker from MongoDB collection
     async fetchNewsFeedForTicker(req, res) {}
