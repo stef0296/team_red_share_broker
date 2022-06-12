@@ -3,6 +3,7 @@ var mongo = require("mongodb");
 var config = require("../config/config");
 var client = new mongo.MongoClient(config.mongoUrl);
 var Collection = require('../enums/collection.enum');
+const AvlDatabases = require("../enums/database.enum");
 var db;
 class MongoController {
   async init() {
@@ -16,8 +17,9 @@ class MongoController {
   }
 
   /// Generic function for user to read data from the database
-  async getData(collectionName, filter = {}) {
+  async getData(collectionName, filter = {}, database = AvlDatabases.DB01) {
     try {
+      db = client.db(database);
       const collection = db.collection(collectionName);
       let data = await collection.find(filter).toArray();
       return data;
@@ -28,8 +30,9 @@ class MongoController {
   }
 
   /// Generic function for user to insert data in the database
-  async setData(collectionName, data, isMany = false) {
+  async setData(collectionName, data, isMany = false, database = AvlDatabases.DB01) {
     try {
+      db = client.db(database);
       const collection = db.collection(collectionName);
       
       /// In case user is inserting an array of objects,
