@@ -28,18 +28,21 @@ class Watchlist {
 
   async fetchWatchlist(req, res) {
     let data = await this.getWatchlistFromCollection();
-    // res.send(data);
+    res.send(data);
   }
 
   /// Database write method to add watchlist data to collection
+  /// Data is also cached to redis
   async addwatchlistToCollection(data) {
-    await redisController.setData(Collection.QUOTE, data);
     await mongoHelper.setData(Collection.QUOTE, data, false);
+    await redisController.setData(Collection.QUOTE, data);
   }
 
   /// Database read method to get data from collection
   async getWatchlistFromCollection() {
     let result = await redisController.getData(Collection.QUOTE);
+    
+    /// If data is not cached in redis, fetch data from mongoDB and cache it before returning the result
     if(result.length == 0) {
       result = await mongoHelper.getData(Collection.QUOTE, {});
       for(let item of result) {
