@@ -4,6 +4,7 @@ const Collection = Object.freeze({
     TIMESERIES: "timeseries",
     USERS: "users",
     DEPOSITS: "deposits",
+    BUY: 'buy',
     TRANSACTIONS: "transactions",
     WATCHLIST: "watchlist",
     QUOTE: 'quote'
