@@ -5,6 +5,7 @@ const Collection = Object.freeze({
     USERS: "users",
     DEPOSITS: "deposits",
     BUY: 'buy',
+    SELL: 'sell',
     TRANSACTIONS: "transactions",
     WATCHLIST: "watchlist",
     QUOTE: 'quote'
