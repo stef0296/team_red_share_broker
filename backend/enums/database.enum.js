@@ -1,5 +1,5 @@
 const AvlDatabases = Object.freeze({
-    NEWS: 'news',
+    NEWS: 'News',
     DB01: 'db01',
     RECOMMENDATION: 'recommendation'
 });
