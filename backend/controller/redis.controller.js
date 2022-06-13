@@ -7,9 +7,7 @@ class RedisController {
   async init() {
     try {
       await client.connect();
-      await client.set("myName", "teamred");
-      const value = await client.get("myName");
-      console.log(`myName: ${value}`);
+      console.log("Connected to redis");
     } catch (err) {
       console.log(err);
     }
@@ -18,7 +16,7 @@ class RedisController {
   async getData(key) {
     try {
       let result = await client.LRANGE(key, 0, -1);
-      for(let i = 0; i < result.length; i++) {
+      for (let i = 0; i < result.length; i++) {
         result[i] = JSON.parse(result[i]);
       }
       return result;
