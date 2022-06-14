@@ -20,18 +20,29 @@ app.use(
 app.get("/", (_, res, next) =>
   res.send("Team Red | Share Broker API Services")
 );
-app.get("/av-news", (req, res, next) => newsController.fetchNewsFromApi(req, res));
+app.get("/av-news", (req, res, next) =>
+  newsController.fetchNewsFromApi(req, res)
+);
 
-app.get("/av-ticker-news", (req, res, next) => newsController.fetchNewsForTickerFromApi(req, res));
+app.get("/av-ticker-news", (req, res, next) =>
+  newsController.fetchNewsForTickerFromApi(req, res)
+);
 
-app.get("/fetch-news", (req, res, next) => newsController.fetchNewsFeed(req, res));
+app.get("/fetch-news", (req, res, next) =>
+  newsController.fetchNewsFeed(req, res)
+);
 
-app.get("/fetch-ticker-news", (req, res, next) => newsController.fetchNewsFeedForTicker
-(req, res));
+app.get("/fetch-ticker-news", (req, res, next) =>
+  newsController.fetchNewsFeedForTicker(req, res)
+);
 
-app.get("/build-watchlist", (req, res, next) => watchlistController.fetchWatchlistFromApi(req, res));
+app.get("/build-watchlist", (req, res, next) =>
+  watchlistController.fetchWatchlistFromApi(req, res)
+);
 
-app.get("/get-watchlist", (req, res, next) => watchlistController.fetchWatchlist(req, res));
+app.get("/get-watchlist", (req, res, next) =>
+  watchlistController.fetchWatchlist(req, res)
+);
 
 app.listen(config.serverPort, async () => {
   console.log(`App listening on port ${config.serverPort}`);
