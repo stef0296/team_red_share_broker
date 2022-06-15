@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 
 //import Footer from "./components/Footer";
 import Menu from "./pages/Menu";
-import User from "./pages/User";
+import Search from "./pages/Search";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
 
-          <Route path="/users" exact component={User} />
+          <Route path="/users" exact component={Search} />
           <Route path="/menu" exact component={Menu} />
         </Switch>
       </Router>

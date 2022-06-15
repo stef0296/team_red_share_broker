@@ -8,7 +8,6 @@ import { default as mongodb } from 'mongodb';
 import ejs from 'ejs';
 import readline from 'readline-sync';
 
-
 let MongoClient = mongodb.MongoClient;
 
 // MongoDB connection

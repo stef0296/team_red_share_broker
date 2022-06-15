@@ -14,12 +14,12 @@ function Navbar() {
       <div className="leftSide" id={openLinks ? "open" : "close"}>
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
-          <Link to="/users"> User </Link>
+          <Link to="/search"> Search </Link>
         </div>
       </div>
       <div className="rightSide">
         <Link to="/"> Home </Link>
-        <Link to="/users"> User </Link>
+        <Link to="/search"> Search </Link>
 
         <button onClick={toggleNavbar}>
           <ReorderIcon />
