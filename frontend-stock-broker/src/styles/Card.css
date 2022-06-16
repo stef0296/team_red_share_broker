@@ -1,13 +1,41 @@
 .cardofnews{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    height:150px;
-    width: 480px;
-    padding: 10px;
+    height: 300px;
+    width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+  }
+
+ .card{
+  font-family: monospace;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 120px;
+    width: 400px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
   }
+  
+.percent{
+  background: green;
+  align-items:flex-end;
+  font-size:larger;
+}
 
+.pricec {
+  color: navy;
+  font-size: x-large;
+}
+
+.tradingday {
+font-size: medium;
+font-style: bold;
+color: darkgray;
+}
   .newstitle{
     margin-top: 10px;
     font-size: 15px;
