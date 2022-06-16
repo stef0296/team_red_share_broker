@@ -1,11 +1,37 @@
 .cardofnews{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    height: 150px;
-    width: 400px;
-    padding: 20px;
+    height:150px;
+    width: 480px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+  }
+
+  .newstitle{
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+  }
+
+  .actualnews{
+    color:rgb(0, 97, 175);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+  }
+
+  .newssummary{
+   
   }
 
   .cardofnews:hover {

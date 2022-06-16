@@ -19,10 +19,16 @@
     margin-left: 20px;
     margin-top: 20px;
  }
+
+ .combobox{
+  width: 100px;
+  padding: 5px;
+ }
+ 
  .leftdiv{
   border-right: 1px solid#131313; 
   height: auto;
-  width: 680px;
+  width: 580px;
   margin-left: 100px;
   margin-top: 40px;
   }

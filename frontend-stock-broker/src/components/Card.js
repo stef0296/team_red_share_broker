@@ -1,15 +1,17 @@
 import React from "react";
 import "../styles/Card.css";
 
+
 function Card(props) {
   return (
-    <div class="rightdiv">
-      <div class="Cards_div">
-        <div id="cardcomponentofnews" class="cardofnews">
+    <div className="rightdiv">
+      <div className="Cards_div">
+        <div id="cardcomponentofnews" className ="cardofnews">
           <div class="container">
-            <h3 id="newstitle">{props.title}</h3>
-            <p id="actualnews">{props.url}</p>
-            <p id="newssummary">{props.summary}</p>
+            <p className="newstitle" id="newstitle">{props.title}</p>
+            <label>Source: </label>
+            <a className="actualnews" id="actualnews" href={props.url}>{props.url}</a>
+       
           </div>
         </div>
       </div>
