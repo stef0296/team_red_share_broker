@@ -8,6 +8,7 @@ import { default as mongodb } from 'mongodb';
 import ejs from 'ejs';
 import readline from 'readline-sync';
 
+
 let MongoClient = mongodb.MongoClient;
 
 // MongoDB connection
@@ -90,11 +91,11 @@ const session = driver.session();
 
 async function display_recomendation() {
     // Parameters for the Query using User Input
-    console.log("*****************************************************************");
-    console.log("           R E C O M E N D A T I O N   E N G I N E");
-    console.log("*****************************************************************");
+    console.log("**********************************************************************");
+    console.log("             R E C O M E N D A T I O N   E N G I N E");
+    console.log("**********************************************************************");
     console.log("         Name of Stocks      Stock Symbol   Sector of Stock");
-    console.log("*****************************************************************");
+    console.log("**********************************************************************");
     console.log("1. American Eagle Outfitters Inc  (AEO)    - Consumer Cyclical");
     console.log(" ");
     console.log("2. YPB GROUP FPO                  (YPB.AX) - Industrials");
@@ -116,7 +117,7 @@ async function display_recomendation() {
     console.log("10. Vista Gold Corporation        (VGZ.TO) - Basic Materials");
     console.log(" ");
     console.log("11. Molson Coors Beverage         (TAP)    - Consumer Defensive");
-    console.log("*****************************************************************");
+    console.log("**********************************************************************");
     console.log("Please enter the stock of your choice: ");
     let Selection = Number(readline.question());
     
@@ -156,13 +157,13 @@ async function display_recomendation() {
         break;
         case 4:
             s_symbol = 'APA '
-            country = 'United States ';
+            country = 'Norway ';
             sector = 'Energy ';
             beta = ">";
             dividend = 0;
-            upper_range_r = 2.5;
-            lower_range_r = 0.5;
-            upper_range_d = 2;
+            upper_range_r = 3.5;
+            lower_range_r = 2;
+            upper_range_d = 1;
         break;
         case 5:
             s_symbol = 'AAPL '
@@ -286,13 +287,14 @@ async function save1() {
         for(let i=0; i<3; i++)
         {
             var s_name = data[i].replace(/\s/g, '');
-            
             // Fetching API data to get real time prices
             var query_string = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + s_name + "&interval=5min&apikey=WFFUCUNJDVZ5WZ8Q";
             const val = await fetch(query_string);
             const response = await val.json();
+            
             var result = data[3];
             var key = response['Meta Data']['3. Last Refreshed'];
+
             
             // Saving data to MongoDB
             const post = new Post({
@@ -328,7 +330,7 @@ async function UI(){
     const data4 = await query_5();
 
     // Parameters to be passed to HTML
-    var result1_11 = "Stock Name: " + data1['records'][0]['_fields'][0]['Symbol'];
+    var result1_11 = "Stock Name: " + data1['records'][0]['_fields'][0]['Symbol'].replace(/\s/g, '');
     var result1_12 = "Dividend Rate: " + data1['records'][0]['_fields'][0]['Dividend'] + "%";
     var result1_13 = "Sector: " + data1['records'][0]['_fields'][0]['Sector'];
     var result1_14 = "Beta Value: " + data1['records'][0]['_fields'][0]['Beta'];
@@ -604,3 +606,4 @@ async function query_5() {
 
 // Calling the main function
 Update_DB();
+

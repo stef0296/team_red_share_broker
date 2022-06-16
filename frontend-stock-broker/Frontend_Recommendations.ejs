@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share broker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+          }
+          .center{
+            text-align: center;
+          }
+
+          .column {
+            border-style:solid;
+            border-color: white;
+            text-align: center;
+            column-gap: 30px;
+            float: left;
+            width: 33.33%;
+            padding: 20px;
+            height: 460px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+          .border {
+            border-style:solid;
+            border-color: white;
+          }
+          .column1 {
+            border-style:solid;
+            border-color: white;
+            text-align: center;
+            float: left;
+            width: 25%;
+            padding: 10px;
+            height: 650px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+
+          .column2 {
+            border-style:solid;
+            border-color: white;
+            text-align: center;
+            color: white;
+            float: left;
+            width: 20%;
+            padding: 10px;
+            height: 250px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+
+          .row:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          .graph {
+            border-style:solid;
+            border-color: gray;
+            
+          }
+          .image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .graph{
+            border-style:solid;
+            border-color: gray;
+          }
+          .btn-group button {
+            
+            border: 2px solid white; 
+            color: white;
+            padding: 10px 24px;
+            cursor: pointer;
+            float: left;
+          }
+
+    </style>
+</head>
+<body>
+  <img class="image" src="https://raw.githubusercontent.com/ishita1809/image/main/head3.gif" alt="this slowpoke moves"  width="1200"></img>
+  <div class="row">
+    <div class="column" style="background-color:rgb(213, 222, 247);">
+      <div class="border">
+        <p><%= Recommended_Stock_1 %></p>
+        <p><%= Name1 %></p>
+        <p><%= Open1 %></p>
+        <p><%= High1 %></p>
+        <p><%= Close1 %></p>
+        <p><%= Low1 %></p>
+        <p><%= country1 %></p>
+        <p><%= sector1 %></p>
+        <p><%= dividend1 %></p>
+        <p><%= mc1 %></p>
+        <p><%= rate1 %></p>
+        <p><%= beta1 %></p>
+      </div>
+      
+    </div>
+    <div class="column" style="background-color:rgb(209, 249, 239);">
+      <div class="border">
+        <p><%= Recommended_Stock_2 %></p>
+        <p><%= Name2 %></p>
+        <p><%= Open2 %></p>
+        <p><%= High2 %></p>
+        <p><%= Close2 %></p>
+        <p><%= Low2 %></p>
+        <p><%= country2 %></p>
+        <p><%= sector2 %></p>
+        <p><%= dividend2 %></p>
+        <p><%= mc2 %></p>
+        <p><%= rate2 %></p>
+        <p><%= beta2 %></p>
+      </div>
+      
+    </div>
+    <div class="column" style="background-color:rgb(191, 216, 228);">
+      <div class="border">
+        <p><%= Recommended_Stock_3 %></p>
+        <p><%= Name3 %></p>
+        <p><%= Open3 %></p>
+        <p><%= High3 %></p>
+        <p><%= Close3 %></p>
+        <p><%= Low3 %></p>
+        <p><%= country3 %></p>
+        <p><%= sector3 %></p>
+        <p><%= dividend3 %></p>
+        <p><%= mc3 %></p>
+        <p><%= rate3 %></p>
+        <p><%= beta3 %></p>
+      </div>
+      
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="column1" style="background-color:rgb(238, 218, 242);">
+      <h2 class="center" style="color:dimgray" >Top 3 stocks offering the highest dividend rate</h2>
+      <div class="border">
+        <p><%= res1_1 %></p>
+        <p><%= res1_2 %></p>
+        <p><%= res1_3 %></p>
+        <p><%= res1_4 %></p>
+
+      </div>
+      
+      <br>
+      <div class="border">
+        <p><%= res2_1 %></p>
+        <p><%= res2_2 %></p>
+        <p><%= res2_3 %></p>
+        <p><%= res2_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res3_1 %></p>
+        <p><%= res3_2 %></p>
+        <p><%= res3_3 %></p>
+        <p><%= res3_4 %></p>
+      </div>
+
+    </div>
+    <div class="column1" style="background-color:rgb(249, 232, 209);">
+      <h2 class="center" style="color:dimgray">Top 3 Volatile stocks offering good dividend rate</h2>
+      <div class="border">
+        <p><%= res11_1 %></p>
+        <p><%= res11_2 %></p>
+        <p><%= res11_3 %></p>
+        <p><%= res11_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res22_1 %></p>
+        <p><%= res22_2 %></p>
+        <p><%= res22_3 %></p>
+        <p><%= res22_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res33_1 %></p>
+        <p><%= res33_2 %></p>
+        <p><%= res33_3 %></p>
+        <p><%= res33_4 %></p>
+      </div>
+      
+      
+    </div>
+    <div class="column1" style="background-color:rgb(242, 212, 212);">
+      <h2 class="center" style="color:dimgray">Top 3 Stable stocks offering good dividend rate</h2>
+      <div class="border">
+        <p><%= res111_1 %></p>
+        <p><%= res111_2 %></p>
+        <p><%= res111_3 %></p>
+        <p><%= res111_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res222_1 %></p>
+        <p><%= res222_2 %></p>
+        <p><%= res222_3 %></p>
+        <p><%= res222_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res333_1 %></p>
+        <p><%= res333_2 %></p>
+        <p><%= res333_3 %></p>
+        <p><%= res333_4 %></p>
+      </div>
+      
+    </div>
+    <div class="column1" style="background-color:rgb(248, 253, 212);">
+      <h2 class="center" style="color:dimgray">Top 3 stocks with Market value greater than 10 billion $</h2>
+      <div class="border">
+        <p><%= res1111_1 %></p>
+        <p><%= res1111_2 %></p>
+        <p><%= res1111_3 %></p>
+        <p><%= res1111_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res2222_1 %></p>
+        <p><%= res2222_2 %></p>
+        <p><%= res2222_3 %></p>
+        <p><%= res2222_4 %></p>
+      </div>
+      <br>
+      <div class="border">
+        <p><%= res3333_1 %></p>
+        <p><%= res3333_2 %></p>
+        <p><%= res3333_3 %></p>
+        <p><%= res3333_4 %></p>
+      </div>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <h2 style="color:dimgray; text-align: center;">Graphical Representation of Data</h2>
+      <h2> </h2>
+      <div class="btn-group">
+        <img src="https://raw.githubusercontent.com/ishita1809/image/main/pic2.png" alt="Trulli" width="40%" height="290px" align="right">
+        <img src="https://raw.githubusercontent.com/ishita1809/image/main/pic11.png" alt="Trulli" width="40%" height="290px" align="left">
+        <button style="text-align: center; font-family: 'Times New Roman', Times, serif; width: 50%; height: 40px; background-color: dimgray; color: white;font-size: large;" onclick="graph1()">Sectors and Country</button>           
+        <button style="text-align: center;font-family: 'Times New Roman', Times, serif; width: 50%; height: 40px; background-color: dimgray; color: white;font-size: large;" onclick="graph2()">Profitability and Stability</button>           
+        <h2> <h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h2 style="color:dimgray; background-color: white; text-align: center;">Attributes used for Stock Analysis</h2>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Sector</h4>
+      <p1>: The sector of the company (Technology, Financial services, consumer cyclical…) </p1>
+    </div>
+    <div class="column2" style="background-color: dimgray;">
+      <h4>The Country</h4> 
+      <p1>: The location of the head office of the company is considered the country of origin</p1>
+    </div>
+    <div class="column2" style="background-color: dimgray;">
+      <h4>The Market Capitalisation</h4>
+      <p1> : Market capitalization refers to the total dollar market value of a company's outstanding shares of stock <br><br>: It is calculated by multiplying the total number of a company's outstanding shares by the current market price of one share</p1>
+    </div>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Current Ratio</h4>
+      <p1> : The Rate is current ratio or liquidity ratio that measures a company’s ability to pay short-term obligations</p1>
+    </div>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Beta Value</h4>
+      <p1> : Beta is a measure of a stock's volatility in relation to the overall market<br><br>: A beta greater than 1.0 suggests that the stock is more volatile than the broader market, and a beta less than 1.0 indicates a stock with lower volatility</p1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Dividend rate</h4>
+      <p1> : Represents the ratio of a company's annual dividend compared to its share price(%)</p1>
+    </div>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Open Price</h4>
+      <p1> : The price at which a security first trades upon the opening of an exchange on a trading day (in $)</p1>
+    </div>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Closing Price</h4>
+      <p1> : The price at which a security first trades upon the closing of an exchange on a trading day (in $)</p1>
+    </div>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>High Price</h4>
+      <p1> : Highest intraday price of a stock in the most recent (or current) trading session (in $)</p1>
+    </div>
+    <div class="column2" style="background-color:dimgray;">
+      <h4>Low Price</h4>
+      <p1> : Lowest intraday price of a stock in the most recent (or current) trading session (in $)</p1>
+    </div>
+  </div>
+</body>
+<script>   
+  function graph1() {   
+  window.open("https://raw.githubusercontent.com/ishita1809/image/main/C_S_Graph.png");  
+  }   
+  function graph2() {   
+  window.open("https://raw.githubusercontent.com/ishita1809/image/main/P_S_Graph.png");  
+  }   
+</script>
+</html>
