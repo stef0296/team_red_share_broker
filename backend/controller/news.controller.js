@@ -43,7 +43,7 @@ class NewsController {
         res.send(response);
     }
 
-    /// Database write method to add news to collection
+    /// Both Databases write method to add news to collection
     async addNewsToCollection(data) {
         await mongoHelper.setData(Collection.NEWS, data, true, AvlDatabases.NEWS);
         for(let item of data) {
@@ -51,7 +51,7 @@ class NewsController {
         }
     }
 
-    /// Database write method to add news data for a ticker to collection
+    /// Both Databases write method to add news data for a ticker to collection
     async addTickerNewsToCollection(ticker, data) {
         await mongoHelper.setData(ticker, data, true, AvlDatabases.NEWS);
         for(let item of data) {

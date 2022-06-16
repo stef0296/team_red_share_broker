@@ -44,6 +44,9 @@ app.get("/get-watchlist", (req, res, next) =>
   watchlistController.fetchWatchlist(req, res)
 );
 
+// const searchRoute = require("./searchRoute");
+// app.use("/stock", searchRoute);
+
 app.listen(config.serverPort, async () => {
   console.log(`App listening on port ${config.serverPort}`);
   await mongoHelper.init();
