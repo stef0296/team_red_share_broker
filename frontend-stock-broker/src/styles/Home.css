@@ -16,15 +16,15 @@
     margin-left: 50px;
   }
   .rightdiv{
-    margin-left: 20px;
+    margin-left: 40px;
     margin-top: 20px;
  }
  .leftdiv{
   border-right: 1px solid#131313; 
   height: auto;
-  width: 680px;
-  margin-left: 100px;
-  margin-top: 40px;
+  width: 450px;
+  margin-left: 60px;
+  margin-top: 20px;
   }
   .headerContainer h1 {
     justify-content: center;
@@ -118,8 +118,9 @@
 }
 
 .tb_search{
-  width: 300px;
-  margin-right: 20px;
+  width: 400px;
+  height: 20px;
+  margin-right: 10px;
  }
  
  .btn_search{

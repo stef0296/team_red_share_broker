@@ -1,7 +1,7 @@
 const config = require("../config/config");
 const axios = require("axios").default;
 var mongoHelper = require("./mongo.controller");
-var Collection = require('../enums/collection.enum');
+var Collection = require("../enums/collection.enum");
 const redisController = require("./redis.controller");
 
 class Watchlist {
@@ -18,12 +18,12 @@ class Watchlist {
       let data = response.data;
       data = {
         symbol: stock,
-        quote: data['Global Quote']
-      }
+        quote: data["Global Quote"],
+      };
       this.addwatchlistToCollection(data);
       await this.timeout(20000);
     }
-    res.send('done');
+    res.send("done");
   }
 
   async fetchWatchlist(req, res) {
@@ -41,11 +41,11 @@ class Watchlist {
   /// Database read method to get data from collection
   async getWatchlistFromCollection() {
     let result = await redisController.getData(Collection.QUOTE);
-    
+
     /// If data is not cached in redis, fetch data from mongoDB and cache it before returning the result
-    if(result.length == 0) {
+    if (result.length == 0) {
       result = await mongoHelper.getData(Collection.QUOTE, {});
-      for(let item of result) {
+      for (let item of result) {
         await redisController.setData(Collection.QUOTE, item);
       }
     }

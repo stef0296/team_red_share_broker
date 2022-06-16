@@ -1,7 +1,6 @@
 import "../styles/Home.css";
 import React, { useState, useEffect } from "react";
 import Card from "../components/Card";
-import "../styles/Home.css";
 import Button from "react-bootstrap/Button";
 import Axios from "axios";
 import Watchlist_Card from "../components/Watchlist_Card";
@@ -31,11 +30,16 @@ function Home() {
   return (
     <div className="maindiv">
       <div class="leftdiv">
+        <h1>Watchlist</h1>
         <input
+          align="left"
+          class="tb_search"
+          width={100}
           placeholder="Search Stocks by Symbol"
           onChange={(event) => setQuery(event.target.value)}
-        />
-
+        />{" "}
+        <br></br>
+        <br></br> <br></br>
         {watchlist
           .filter((watch) => {
             if (query === "") {
@@ -54,6 +58,7 @@ function Home() {
                   open={watch["quote"]["02. open"]}
                   price={watch["quote"]["05. price"]}
                   changepercent={watch["quote"]["10. change percent"]}
+                  tradingday={watch["quote"]["07. latest trading day"]}
                 />
               </div>
             );
