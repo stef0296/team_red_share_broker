@@ -9,13 +9,17 @@ function Home() {
   const [listnews, setlistnews] = useState([]);
   const [watchlist, setwatchlist] = useState([]);
   const [query, setQuery] = useState("");
+  const [combo_val, setcombo_val] = useState("");
+
 
   useEffect(() => {
-    Axios.get("http://localhost:4000/fetch-news").then((response) => {
-      setlistnews(response.data);
-    });
-    Axios.get("http://localhost:4000/get-watchlist").then((response) => {
-      let data = response.data;
+    async function fetchData() {
+      let newsData = await Axios.get("http://localhost:4000/fetch-news");
+      setlistnews(newsData.data);
+
+      let watchlistData = await Axios.get("http://localhost:4000/get-watchlist");
+      let data = watchlistData.data;
+
 
       for (let obj of data) {
         let check = typeof obj["quote"]["02. open"];
@@ -24,7 +28,8 @@ function Home() {
         }
       }
       setwatchlist(data);
-    });
+    }
+    fetchData();
   }, []);
 
   return (
@@ -66,6 +71,29 @@ function Home() {
       </div>
 
       <div className="rightdiv">
+        <div>
+          <h3>News</h3>
+          <select className="combobox" onChange={async (e) => {
+            const selectedcomboval = e.target.value;
+            setcombo_val(selectedcomboval);
+            if (selectedcomboval === 'ALL') {
+              let newsData = await Axios.get("http://localhost:4000/fetch-news");
+              setlistnews(newsData.data);
+              return;
+            }
+
+            let newsData = await Axios.get(`http://localhost:4000/fetch-ticker-news?ticker=${selectedcomboval}`)
+            setlistnews(newsData.data);
+          }}>
+            <option value="ALL">ALL</option>
+            <option value="AAPL">Apple</option>
+            <option value="NKE">Nike</option>
+            <option value="ABFRL">Adiya Birla</option>
+
+          </select>
+        
+
+        </div>
         {listnews.map((news) => {
           return (
             <div>
@@ -73,6 +101,9 @@ function Home() {
                 title={news.title}
                 url={news.url}
                 summary={news.summary}
+                source={news.source}
+                ticker=''
+
               ></Card>
             </div>
           );

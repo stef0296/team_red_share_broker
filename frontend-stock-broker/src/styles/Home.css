@@ -19,6 +19,12 @@
     margin-left: 40px;
     margin-top: 20px;
  }
+
+ .combobox{
+  width: 100px;
+  padding: 5px;
+ }
+ 
  .leftdiv{
   border-right: 1px solid#131313; 
   height: auto;
