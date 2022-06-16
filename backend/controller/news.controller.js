@@ -3,6 +3,7 @@ const axios = require('axios').default;
 var mongoHelper = require('./mongo.controller');
 var Collection = require('../enums/collection.enum');
 const AvlDatabases = require('../enums/database.enum');
+const redisController = require('./redis.controller');
 
 class NewsController {
 
@@ -45,23 +46,45 @@ class NewsController {
     /// Database write method to add news to collection
     async addNewsToCollection(data) {
         await mongoHelper.setData(Collection.NEWS, data, true, AvlDatabases.NEWS);
+        for(let item of data) {
+            await redisController.setData(Collection.NEWS, item);
+        }
     }
 
     /// Database write method to add news data for a ticker to collection
     async addTickerNewsToCollection(ticker, data) {
         await mongoHelper.setData(ticker, data, true, AvlDatabases.NEWS);
+        for(let item of data) {
+            await redisController.setData(`${Collection.NEWS}-${ticker}`, item);
+        }
     }
 
     /// Database read method to get news feed
     async getNewsFeedFromCollection() {
-        let data = await mongoHelper.getData(Collection.NEWS, {}, AvlDatabases.NEWS);
-        return(data);
+        let result = await redisController.getData(Collection.NEWS);
+    
+        /// If data is not cached in redis, fetch data from mongoDB and cache it before returning the result
+        if(result.length == 0) {
+          result = await mongoHelper.getData(Collection.NEWS, {});
+          for(let item of result) {
+            await redisController.setData(Collection.NEWS, item);
+          }
+        }
+        return result;
     }
 
     /// Database read method to get news feed for specific ticker
     async getTickerNewsFromCollection(ticker) {
-        let data = await mongoHelper.getData(ticker, {}, AvlDatabases.NEWS);
-        return data;
+        let result = await redisController.getData(`${Collection.NEWS}-${ticker}`);
+    
+        /// If data is not cached in redis, fetch data from mongoDB and cache it before returning the result
+        if(result.length == 0) {
+          result = await mongoHelper.getData(ticker, {}, AvlDatabases.NEWS);
+          for(let item of result) {
+            await redisController.setData(`${Collection.NEWS}-${ticker}`, item);
+          }
+        }
+        return result;
     }
 }
 
