@@ -10,7 +10,7 @@ function Card(props) {
           <div class="container">
             <p className="newstitle" id="newstitle">{props.title}</p>
             <label>Source: </label>
-            <a className="actualnews" id="actualnews" href={props.url}>{props.url}</a>
+            <a className="actualnews" id="actualnews" target="_blank" href={props.url} >{props.url}</a>
        
           </div>
         </div>
@@ -18,5 +18,7 @@ function Card(props) {
     </div>
   );
 }
+
+
 
 export default Card;
