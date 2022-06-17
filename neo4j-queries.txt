@@ -1,0 +1,25 @@
+// Import buy data to Neo4J
+call apoc.mongo.find("mongodb://node-api:1234@srh-adb-01-shard-00-00.inyaq.mongodb.net:27017,srh-adb-01-shard-00-01.inyaq.mongodb.net:27017,srh-adb-01-shard-00-02.inyaq.mongodb.net:27017/db01.buy?ssl=true&replicaSet=atlas-5gerx0-shard-0&authSource=admin&retryWrites=true&w=majority") yield value
+with value.symbol as symbol, value.userId as userId
+create (u:User{userId: userId}) -[:buys]-> (s:Stocks{symbol: symbol})
+
+// Import sell data to Neo4J
+call apoc.mongo.find("mongodb://node-api:1234@srh-adb-01-shard-00-00.inyaq.mongodb.net:27017,srh-adb-01-shard-00-01.inyaq.mongodb.net:27017,srh-adb-01-shard-00-02.inyaq.mongodb.net:27017/db01.sell?ssl=true&replicaSet=atlas-5gerx0-shard-0&authSource=admin&retryWrites=true&w=majority") yield value
+with value.symbol as symbol, value.userId as userId
+create (u:User{userId: userId}) -[:sells]-> (s:Stocks{symbol: symbol})
+
+// Data imported from MongoDB has properties userId and stock symbol which are used to create the respective nodes.
+// However these relations are 1-1, as a result there are a lot of duplicate nodes created.
+// These nodes are merged together using the apoc.refactor.mergeNodes() function.
+
+// merge duplicate user nodes
+MATCH(u:User)
+With u.userId as userId, COLLECT(u) as userList, COUNT(*) AS count
+CALL apoc.refactor.mergeNodes(userList) YIELD node
+RETURN node
+
+// merge duplicate stock symbols
+MATCH(s:Stocks)
+With s.symbol as symbol, COLLECT(s) as stockList, COUNT(*) AS count
+CALL apoc.refactor.mergeNodes(stockList) YIELD node
+RETURN node
